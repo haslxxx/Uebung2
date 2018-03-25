@@ -21,12 +21,12 @@ class PhpLoopController {
     // ########  1
     public function __construct() {
         // TODO (1) Characterarray befüllen
-        $Data = new Data();
-        $this->Characters = $Data->getCharacters();
+        $RawData = new Data();
+        $this->Characters = $RawData->getCharacters();
     }
 
     // ######## Debug Helferlein
-    private function msg($tag = "",$toShow=""){ // methoden überladen geht in php nicht, ergo trick mit zuweisung in der parameterdefinition
+    public function msg($tag = "",$toShow=""){ // methoden überladen geht in php nicht, ergo trick mit zuweisung in der parameterdefinition
         if ($DEBUG=1) {
             echo $tag . ": " . $toShow . "<br />\n";
         }
@@ -59,23 +59,24 @@ class PhpLoopController {
             $this->msg("Par2",$this->getParam2);
             switch ($this->getParam1){
                 case "FLIP":
-                    $loopObject = new Flip;
+                    $loopObject = new Flip($this->Characters);
                     $result = $loopObject->getFlipped();
                     break;
                 case "ODD":
                     $loopObject = new Odd;
-                    $result = $loopObject->getOdded();                  
+                    $result = $loopObject->getOdded($this->Characters);                  
                     break;
                 case "UNTIL":
                     // ################## hier gehört noch geprüft ob es param2 gibt und ob er im range liegt A-Z
                     // uppercase könnte man auch noch irgendwo machen !!
                     $loopObject = new Until($this->getParam2);
-                    $result = $loopObject->getUntilled();
+                    $result = $loopObject->getUntilled($this->Characters,$this->getParam2);
                     break;
                 default:
                     $result = "";
                     break;
             }
+            $this->msg("Ergebnis",implode(",",$result));
             
         } else echo "Missing Parameter(s)";
         // TODO (4) Output basteln und retournieren
