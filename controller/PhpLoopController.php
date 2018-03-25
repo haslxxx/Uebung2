@@ -1,13 +1,10 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of PhpLoopController
+ * - Ruft im Konstruktor die rohdatenherbeischaffung auf (liest ein json file ein mit einem chararray A-Z)
+ * - Methode route() kümmert sich um die aufrufparameter "request vom Browser
+ *  -- Aufrufparameter:  "simulation"  werte: FLIP ; ODD ; UNTIL  /  "wert"  werte:  a-z , A-Z (der parameter für die UNTIL funktion)
+ * - Methode loopLogic() wickelt den job ab (quasi die main-methode
  *
  * @author ego
  */
@@ -16,7 +13,7 @@ class PhpLoopController {
     private $Characters = array();  // hier bekommen wir unsere daten lokal gelagert
     private $getParam1;             // hier werden die requestparameter zwischengelagert
     private $getParam2;
- 
+
     private $jsonView;
     
     // ########  1  Konstruktor Holt Rohdaten über eigene Klasse 
@@ -50,7 +47,6 @@ class PhpLoopController {
     
     // ########  3
     public function loopLogic(){
-        $result = 0; // soll mal ein chararray werden 
         // TODO (2) GET parameter holen
         $this->msg("Jetzt geht's lohooos  :-)");
         // TODO (3) request parameter holen & entscheiden welche loop und aufrufen
@@ -61,25 +57,29 @@ class PhpLoopController {
             $this->msg("Par2",$this->getParam2);
             switch ($this->getParam1){
                 case "FLIP":
-                    $loopObject = new Flip($this->Characters);
-                    $resultType = "FLIP-result: ";
-                    $result = $loopObject->getFlipped();
+                    $loopObject = new Flip($this->Characters); //erzeugt ein FLIP element und damit auch gleich die ergebnistabelle
+                    $resultType = "FLIP-result: ";             // für eine nette ausgabe
+                    $result = $loopObject->getFlipped();       // ergebnistabelle abholen
                     break;
                 case "ODD":
-                    $loopObject = new Odd;
+                    $loopObject = new Odd($this->Characters);
                     $resultType = "ODD-result: ";
-                    $result =  $loopObject->getOdded($this->Characters);                  
+                    $result =  $loopObject->getOdded();                  
                     break;
-                case "UNTIL":
-                    // ################## hier gehört noch geprüft ob es param2 gibt und ob er im range liegt A-Z
-                    // uppercase könnte man auch noch irgendwo machen !!
-                    $loopObject = new Until($this->getParam2);
+                case "UNTIL":                  
+                    if ($numOfParams != 2) { // geprüft ob es param2 gibt
+                        echo "Missing Stop Parameter";
+                        break;               // lazy logic .. aber nachdem's eh schon ein brak hier gibt ... was soll's
+                    }
+                    // ################ gehörte noch geprüft ob er im range liegt A-Z  ??????
+                    
+                    $this->getParam2 =  strtoupper($this->getParam2) ;// uppercase aus dem parameter machen !!
+                    
+                    $loopObject = new Until($this->Characters, $this->getParam2);
                     $resultType = "UNTIL-result: ";
-                    $result = $loopObject->getUntilled($this->Characters,$this->getParam2);
+                    $result = $loopObject->getUntilled();
                     break;
                 default:
-                    $resultType = "NO Result";
-                    $result = ""; // .. damit kein nicht existentes Variaberl' herumliegt
                     break;
             }            
         } else echo "Missing Parameter(s)";
@@ -92,7 +92,9 @@ class PhpLoopController {
             $this->jsonView = new JsonView();     
             $this->jsonView->streamOutput($resultType); //Ausgabe als json
             $this->jsonView->streamOutput($result); //Ausgabe als json
-        }       
+        } else {
+            echo ("Wrong request (use (FLIP | ODD | UNTIL) ; while UNTIL needs a stop Character also");
+        }      
     }
     
     
