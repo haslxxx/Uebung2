@@ -1,14 +1,9 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of Flip
- *
+ * Bekommt ein characterarray im construct aufruf und wandelt es in die 
+ * "ge-flip-te" variante (erster ist letzter)
+ * Methode getFlipped gibt dieses array zurück
  * @author ego
  */
 class Flip {
