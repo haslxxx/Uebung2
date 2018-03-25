@@ -1,16 +1,17 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of Until
- *
- * @author ego
- */
 class Until {
-    //put your code here
+    private $untilArray;
+
+    // TODO (1) im construktor  bereits ergebnisarray herstellen, weil vielmehr tut die klasse ja nicht
+    public function __construct($stopChar) {
+            $this->untilArray = array();
+            // TODO   BEFÜLLEN !!!!
+    }
+    //Ergebnis array zurückliefern  .. ein getter
+    public function getUntilled(){
+        $this->untilArray[0] = ("A");  // NUR ZUM TESTEN MUSS NOCH ERSETZT WERDEN
+        return $this->untilArray;
+    }
+
 }

@@ -12,5 +12,14 @@
  * @author ego
  */
 class Flip {
-    //put your code here
+    
+    private $flippedArray;
+    // TODO (1) im construktor  bereits ergebnisarray herstellen, weil vielmehr tut die klasse ja nicht
+    public function __construct() {
+        ;
+    }
+    //Ergebnis array zurückliefern  .. ein getter
+    public function getFlipped(){
+        return $flippedArray;
+    }
 }

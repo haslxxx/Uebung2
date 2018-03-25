@@ -13,7 +13,9 @@ and open the template in the editor.
         <?php
             include "config/config.php";
             //TODO Controller instanzieren
+            $loopController = new PhpLoopController;
             //TODO Controller aufrufen
+            $loopController->loopLogic();
         ?>
     </body>
 </html>
