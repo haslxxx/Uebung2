@@ -64,12 +64,12 @@ class PhpLoopController {
             switch ($this->getParam1){
                 case "FLIP":
                     $loopObject = new Flip($this->Characters); //erzeugt ein FLIP element und damit auch gleich die ergebnistabelle
-                    $resultType = "FLIP-result: ";             // für eine nette ausgabe
+                    $resultType = "FLIP-result";             // für eine nette ausgabe
                     $result = $loopObject->getFlipped();       // ergebnistabelle abholen
                     break;
                 case "ODD":
                     $loopObject = new Odd($this->Characters);
-                    $resultType = "ODD-result: ";
+                    $resultType = "ODD-result";
                     $result =  $loopObject->getOdded();                  
                     break;
                 case "UNTIL":                  
@@ -82,7 +82,7 @@ class PhpLoopController {
                     $this->getParam2 =  strtoupper($this->getParam2) ;// uppercase aus dem parameter machen !!
                     
                     $loopObject = new Until($this->Characters, $this->getParam2);
-                    $resultType = "UNTIL-result: ";
+                    $resultType = "UNTIL-result";
                     $result = $loopObject->getUntilled();
                     break;
                 default:
@@ -95,9 +95,15 @@ class PhpLoopController {
             $this->msg("Ergebnis",implode(",",$result));
             
             // TODO (4) Json objekt instanzieren und Methode zur ausgeabe aufrufen
-            $this->jsonView = new JsonView();     
-            $this->jsonView->streamOutput($resultType); //Ausgabe als json
-            $this->jsonView->streamOutput($result); //Ausgabe als json
+            $this->jsonView = new JsonView();    
+// FIXME : wie würde das assehen wenns funktionieren soll ??
+//            $this->jsonView->streamOutput($resultType); //Ausgabe als json  
+//            echo ($result . "\n"); // ersatzhandlung !  .. GEHT AUCH NICHT
+            
+            $outArray["Result-type"] = $resultType; // soo klapts :-)   SIEHE Anmerkungen am ende von "JsonView.php"
+            $outArray["Result"] = $result;
+            
+            $this->jsonView->streamOutput($outArray); //Ausgabe als json
         } else {
             echo ("Wrong request (use parameter:simulation(FLIP | ODD | UNTIL) ; while UNTIL needs a stop Character in parameter:wert also)");
         }      
