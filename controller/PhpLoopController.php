@@ -93,7 +93,7 @@ class PhpLoopController {
             $this->jsonView->streamOutput($resultType); //Ausgabe als json
             $this->jsonView->streamOutput($result); //Ausgabe als json
         } else {
-            echo ("Wrong request (use (FLIP | ODD | UNTIL) ; while UNTIL needs a stop Character also");
+            echo ("Wrong request (use parameter:simulation(FLIP | ODD | UNTIL) ; while UNTIL needs a stop Character in parameter:wert also)");
         }      
     }
     

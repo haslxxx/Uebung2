@@ -1,8 +1,7 @@
-        <?php
-            include "config/config.php";
-            //TODO Controller instanzieren
-            $loopController = new PhpLoopController;
-            //TODO Controller aufrufen
-            $loopController->loopLogic();
-        ?>
- 
+<?php
+    include "config/config.php";
+    //Controller instanzieren
+    $loopController = new PhpLoopController;
+    //Controller Methode aufrufen
+    $loopController->loopLogic();
+?>
