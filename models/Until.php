@@ -8,7 +8,21 @@ class Until {
         $this->untilArray = $this->untilling($arrayToConvert, $stopVal);
     }
     
+    // MIT While-schleife    ... ANM: alles in allem mühsamer und unleserlicher als die variante mit for-schleife
     private function untilling ($toBeUntilled, $stopUntil) {
+        $size = count($toBeUntilled);
+        $xi = 0;
+        while ($xi<$size && ($toBeUntilled[$xi] != $stopUntil)){
+            $resultArray[] = $toBeUntilled[$xi]; // anhängen hinten braucht keinen index
+            $xi++;
+        }
+        if ($xi < $size) $resultArray[] = $toBeUntilled[$xi]; // den stopwert nehmen wir noch mit ins ergebnis
+        return $resultArray;
+    }
+
+    /* MIT For-schleife
+     * private function untilling ($toBeUntilled, $stopUntil) {
+    
         $size = count($toBeUntilled);
         for ($xi=0;$xi<$size;$xi++){
             $resultArray[] = $toBeUntilled[$xi]; // anhängen hinten braucht keinen index
@@ -16,6 +30,7 @@ class Until {
         }
         return $resultArray;
     }
+     */
 
 
     //Ergebnis array zurückliefern  .. ein getter

@@ -13,6 +13,10 @@ class Odd {
     }
     
     private function odd ($toBeOdded) {
+        $message = new PhpLoopController;  // ich will ja nur meine msg-methode verwenden  !  ;-)
+        $message->msg("ODD wurde aufgerufen");
+        
+        // Alle ungeraden aus dem basisArray holen
         $size = count($toBeOdded);
         for ($xi=0;$xi<$size;$xi++){
             if ($xi % 2 == 0) {

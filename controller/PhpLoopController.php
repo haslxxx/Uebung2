@@ -24,10 +24,14 @@ class PhpLoopController {
 
     }
 
-    // ######## Debug Helferlein
+    // ######## Debug Helferlein (verträgt 1 oder 2 strings im aufruf
     public function msg($tag = "",$toShow=""){ // methoden überladen geht in php nicht, ergo trick mit zuweisung in der parameterdefinition
         if (DEBUG==1) {
-            echo $tag . ": " . $toShow . "<br />\n";
+            if ($toShow == ""){ // wenn nur EIN string übergeben wird, dann isses nicht der TAG sondern der ausgabetext
+                echo "--> " . $tag . "\n"; // ausgabetext im ersten parameter
+            } else {
+                echo "--> " . $tag . ": " . $toShow . "\n";   // wenn  \n nicht wirkt .. dann "<br />\n"             
+            }
         }
     }
 
@@ -52,9 +56,11 @@ class PhpLoopController {
         // TODO (3) request parameter holen & entscheiden welche loop und aufrufen
         $numOfParams = $this->route();
         if ($numOfParams != 0){
-            $this->msg("ParAnz",$numOfParams);
+            $this->msg("ParAnz",$numOfParams);  // debugausgaben !
             $this->msg("Par1",$this->getParam1);
-            $this->msg("Par2",$this->getParam2);
+            if (isset($this->getParam2)) $this->msg("Par2",$this->getParam2);
+            
+            // Fallunterscheidung je nach übergebenem parameterinhalt
             switch ($this->getParam1){
                 case "FLIP":
                     $loopObject = new Flip($this->Characters); //erzeugt ein FLIP element und damit auch gleich die ergebnistabelle

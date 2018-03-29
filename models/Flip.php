@@ -14,6 +14,20 @@ class Flip {
         $this->flippedArray = $this->flip($arrayToConvert);
     }
     
+    //   Mit Foreach schleife
+    private function flip ($toBeFlipped) {
+        $size = count($toBeFlipped);
+        $xi = $size; // wir suchen das basisarray von hinten nach vorne ab
+        foreach ($toBeFlipped as $singleCharacter) {
+            //das array muß man auch nicht vorher deklarieren !
+            $resultArray[] = $toBeFlipped[$xi-1]; // anhängen hinten braucht keinen index
+            $xi--;
+            if ($xi < 0)break; // Notausstieg aus der schleife wenn index negativ zu werden droht
+        }
+        return $resultArray;
+    } 
+
+    /*    MIT for-schleife
     private function flip ($toBeFlipped) {
         $size = count($toBeFlipped);
         for ($xi=$size;$xi>0;$xi--){
@@ -24,7 +38,7 @@ class Flip {
 //        echo implode(", ", $resultArray);
         return $resultArray;
     }
-
+*/
     //Ergebnis array zurückliefern  .. ein getter
     public function getFlipped(){
         return $this->flippedArray;

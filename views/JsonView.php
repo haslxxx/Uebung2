@@ -23,3 +23,10 @@ class JsonView {
         echo $jsonOutput;        
     }
 }
+
+
+/*
+ * FIXME :  
+ * nur der Firefox (und nur mit der "webentwickler" erweiterung) meint:
+ * SyntaxError: JSON.parse: unexpected non-whitespace character after JSON data at line 1 column 16 of the JSON data
+ */
