@@ -4,7 +4,8 @@
 error_reporting(E_ALL);
 
 // Allgemeine konstanten definieren
-define("DATAPATH", 'C:\xampp\htdocs\Uebung2\data\\'); // da wo daten herkommen
+//define("DATAPATH", 'C:\xampp\htdocs\Projekte\Uebung2\data\\'); // da wo daten herkommen
+define("DATAPATH", '.\data\\'); // da wo daten herkommen
 define("DEBUG",0);  // schaltet debugmessages ein/aus
 
 // Klassendateien includieren
